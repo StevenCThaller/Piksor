@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Dis pikxor</h1>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Character Name</th>
+            <th>Description</th>
+            <th>Original Series</th>
+        </thead>
+        <tbody>
+            {% for character in characters %}
+            <tr>
+                <td>{{character.id}}</td>
+                <td>{{character.name}}</td>
+                <td>{{character.description}}</td>
+                <td><a href="/series/{{character.series.id}}">{{character.series.series_name}}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

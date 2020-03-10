@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>{{this_series.series_name}}</h1>
+    <h3>Description: {{this_series.description}}</h3>
+    <p>Released on: {{this_series.first_release_date}}</p>
+    <h4>Characters in this series:</h4>
+    <ul>
+        {% for character in this_series.characters_in_series.all %}
+        <li>{{character.name}}</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
