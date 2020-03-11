@@ -5,28 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <h1>Dis pikxor</h1>
-    <table>
-        <thead>
-            <th>Id</th>
-            <th>Character Name</th>
-            <th>Description</th>
-            <th>Original Series</th>
-        </thead>
-        <tbody>
-            {% for character in characters %}
-            <tr>
-                <td>{{character.id}}</td>
-                <td>{{character.name}}</td>
-                <td>{{character.description}}</td>
-                <td><a href="/series/{{character.series.id}}">{{character.series.series_name}}</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Dis pikxor</h1>
+        <div class="row">
+
+            <table>
+                <thead>
+                    <th>Id</th>
+                    <th>Character Name</th>
+                    <th>Description</th>
+                    <th>Original Series</th>
+                </thead>
+                <tbody>
+                    {% for character in characters %}
+                    <tr>
+                        <td>{{character.id}}</td>
+                        <td>{{character.name}}</td>
+                        <td>{{character.description}}</td>
+                        <td><a href="/series/{{character.series.id}}">{{character.series.series_name}}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="row">
+            <!-- This is the form for adding a new character! -->
+            <div class="col-sm-5">
+                <h2>Add a character!</h2>
+                <form action="/addcharacter" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <label class="col-sm-4" for="name">Name: </label>
+                        <input class="col-sm-8 form-control" type="text" name="name">
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4" for="height">Height: </label>
+                        <input class="col-sm-8 form-control" type="number" name="height" step="0.01">
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4" for="description">Description: </label>
+                        <textarea class="col-sm-8 form-control" name="description" cols="20" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4" for="series">Series: </label>
+                        <select class="col-sm-8 form-control" name="series">
+                            {% for series in all_series %}
+                            <option value="{{series.id}}">{{ series.series_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row">
+                        <input class="btn btn-primary col-sm-3" type="submit" value="Add">
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-2"></div>
+            <!-- This is the form for adding a new series! -->
+            <div class="col-sm-5">
+                <h2>Add a Series!</h2>
+                <form action="/addseries" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <label class="col-sm-4" for="series_name">Name: </label>
+                        <input class="col-sm-8 form-control" type="text" name="series_name">
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4" for="first_release_date">Release Date: </label>
+                        <input class="col-sm-8 form-control" type="date" name="first_release_date">
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4" for="description">Description: </label>
+                        <textarea class="col-sm-8 form-control" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <input class="btn btn-primary col-sm-3" type="submit" value="Add!">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
